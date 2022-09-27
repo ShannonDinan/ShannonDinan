@@ -1,0 +1,767 @@
+---
+title: "ACMQ: Tutoriel R"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R
+
+`R` est un langage de programmation spécialisé dans l'analyse statistique et la visualisation de données. La première version de `R` a été publiée en 1995 par Ross Ihaka et Robert Gentleman, mais le langage s'inspire des travaux de John Chambers aux laboratoires Bell dans les années 1970. Aujourd'hui, `R` est un outil d'analyse statistique populaire, tant dans le secteur privé que dans le monde universitaire. Puisque le langage `R` est développé par des bénévoles, les logiciels qui y sont associés sont presque tous distribués gratuitement, en libre accès. 
+
+Ce tutoriel est conçu pour vous aider à découvrir `R`. Suffit de lire le texte et cliquer sur Next Topic pour aller à la prochaine section. Vous n'avez pas besoin de quitter cette fenêtre ou de retourner à RStudio ou RStudio Cloud.
+
+## Installation
+
+**ATTENTION!** Si vous avez réussi à faire rouler ce tutoriel, vous avez fort probablement déjà installé `R` et `RStudio` sur votre ordinateur personnel ou vous vous êtes créé un compte sur `RStudio Cloud`si vous suivez la version à distance de ce cours. Cette section est donc simplement à titre informatif. De cette manière, pas besoin de cliquer sur les hyperliens. Suffit de lire l'information et passer à la prochaine section.
+
+Typiquement, pour analyser des données avec `R`, il est nécessaire d’installer trois logiciels complémentaires. Or, aux fins de la version en ligne de ce cours, il est uniquement nécessaire de créer un compte `RStudio Cloud`. Ceci est un programme infonuagique qui permet de faire l’analyse de données sans avoir à télécharger des programmes sur votre ordinateur personnel. Tous les travaux et exercices avec R dans ce cours se feront à partir de `RStudio Cloud`.
+
+Si vous ne l'avez pas déjà fait, pour créer votre compte, cliquez [ici](https://login.rstudio.cloud/register?redirect=https%3A%2F%2Fclient.login.rstudio.cloud%2Foauth%2Flogin%3Fshow_auth%3D0%26show_login%3D0%26show_setup%3D0).
+
+Une fois que votre compte est créé, cliquez sur [ce lien](https://can01.safelinks.protection.outlook.com/?url=https%3A%2F%2Flogin.rstudio.cloud%2Finvite%3Fspace_name%3DPOL%2B2000-Z%2BM%25C3%25A9thodes%2Bquantitatives%26code%3D9tltN%252ByVLqitCL1rVgCB%252F%252B0V8rk0Wtqxp%252Fl6uW8J&amp;data=04%7C01%7Cwilliam.poirier.1%40ulaval.ca%7C9119a0b3a3fa4119007208d987439312%7C56778bd56a3f4bd3a26593163e4d5bfe%7C1%7C0%7C637689547430424200%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C0&amp;sdata=EMbletbv2%2Bu9%2FKSqkqJbRadybcaee2t2S2%2F8MNRvJgQ%3D&amp;reserved=0) pour accéder au *Workspace* du cours. Tous les exercices et travaux pratiques s’y trouvent.
+
+Pour les étudiants qui suivent la version en présentiel du cours ou ceux et celles d'entre vous qui souhaitent poursuivre leurs études au cycle supérieur, je vous recommande d'installer trois logiciels directement sur votre ordinateur. Premièrement,le langage de programmation lui-même et les ses outils de calcul. Ces outils peuvent être installés sur des ordinateurs Windows, Mac, ou Linux. Ils sont disponibles gratuitement sur le site web de l'organisation `R`: 
+
+* <https://cran.r-project.org/>
+
+Deuxièmement, les utilisateurs Windows voudront installer `Rtools`. Ce logiciel permet d'installer des fonctions statistiques additionnelles: 
+
+* <https://cran.r-project.org/bin/windows/Rtools/>
+
+Troisièmement, il est utile d'installer l'interface graphique `RStudio`. Ce logiciel est développé par une compagnie privée qui rend disponible une version gratuite en libre accès:
+
+* <https://www.rstudio.com>
+
+
+## Interface graphique
+
+Le Graphique \ref{fig:rstudio} montre une capture d'écran de `RStudio`. L'analyste peut analyser ses données en mode interactif dans la "Console", en cliquant sur la fenêtre en bas à gauche, et en y tapant ses commandes suivies par la touche "Entrée."
+
+```{r rstudio, echo=FALSE, fig.cap='Interface graphique du logiciel RStudio.', out.width='100%'}
+knitr::include_graphics('https://github.com/vincentarelbundock/ACMQ/raw/master/inst/tutorials/R/data/rstudio.png')
+```
+
+Lorsque l'analyste veut exécuter plus qu'une ou deux commandes, il est préférable d'écrire celles-ci dans l'éditeur de texte qui se trouve dans la fenêtre en haut à gauche. À partir de cet éditeur, l'analyste peut cliquer sur l'icône "Run" (ou taper Ctrl-Entrée) pour exécuter ses commandes. Les résultats apparaitront dans la fenêtre en bas à gauche. L'avantage de l'éditeur de texte est qu'il nous permet de sauvegarder nos commandes, et de reproduire facilement des analyses complexes.
+
+`RStudio` offre plusieurs fonctions pratiques. Par exemple, il montre la liste des variables et des objets dans la fenêtre en haut à droite. Les graphiques apparaissent en bas à droite. `RStudio` offre aussi des menus déroulants et des icônes qui permettent facilement d'importer ou de sauver des données, d'installer de nouvelles librairies, etc.
+
+## Manuel d'instruction
+
+Chaque commande du langage `R` est accompagnée d'un manuel d'instruction. Pour consulter ce document de référence, il faut écrire le nom de la commande précédée d'un point d'interrogation. Par exemple, taper la commande suivante dans la console fait apparaître le manuel copié dans le Graphique \ref{fig:ifelse}:
+
+```{r manual, exercise=TRUE}
+?ifelse
+```
+
+\begin{figure}
+\caption{Extrait du manuel d'instruction pour la fonction \texttt{ifelse}.\label{fig:ifelse}}
+\begin{framed}
+\includegraphics[width=\textwidth]{figure/ifelse.png}
+\end{framed}
+\end{figure}
+
+
+## Librairies externes
+
+Le plus grand avantage du logiciel en libre accès `R`, est qu'une vaste communauté scientifique développe des logiciels en libre accès pour bonifier les fonctions de base du langage. Les utilisateurs peuvent facilement télécharger ces librairies, et ainsi bénéficier des outils spécialisés créés par des milliers de programmeurs bénévoles.
+
+Par exemple, la librairie `ggplot2` dessine de superbes graphiques statistiques, et `gganimate` met ces graphiques en mouvement; `haven` lit plusieurs types de bases de données, dont celles produites par les logiciels Stata, SPSS, et SAS; `quanteda` facilite l'analyse quantitative de textes; et `modelsummary` produit de beaux tableaux pour résumer plusieurs modèles statistiques côte-à-côte; `skimr` produit d'utiles résumés des données. Plusieurs librairies permettent de télécharger facilement des données, dont `quantmod` pour les données financières, `WDI` pour les données de la banque mondiale, et `rvest` pour les données qui doivent être moissonnées à partir du web. `R` a aussi de nombreuses librairies pour analyser les données spatiales, pour faire de l'analyse de réseau, de la cartographie, etc.
+
+Pour télécharger et installer ces librairies, il faut utiliser la fonction `install.packages`. Dans le contexte de ce livre, nous utiliserons cinq librairies, en plus des commandes de base. 
+
+Vous pouvez installer les librairies nécessaires pour compléter le livre ACMQ en copiant le code suivant dans la fenêtre "Console" de `RStudio`. **ATTENTION!** Il ne sera pas possible de télécharger ces librairies lorsque ce tutoriel fonctionne. Ceci s'explique du fait que `RStudio` fonctionne actuellement (par exemple, si vous retournez voir votre `RStudio`, vous verrez un bouton rouge "Stop" dans la console. Ceci nous indique que `RStudio` exécute actuellement une ligne de code. De cette manière, si vous tentez de  télécharger ces librairies, `RStudio` va uniquement les mettre dans la file d'attente de commandes à exécuter. Je vous suggère donc plutôt de copier ces lignes de code dans un Script.R pour les télécharger plus tard. Enfin, sachez que cette opération peut prendre quelques minutes :
+
+```{r, eval=FALSE, echo=TRUE}
+install.packages('tidyverse')
+install.packages('prediction')
+install.packages('margins')
+install.packages('mediation')
+install.packages('lme4')
+install.packages('stargazer')
+install.packages('skimr')
+```
+
+Pour activer une librairie et gagner accès à ses fonctions et commandes, il faut exécuter la commande `library`:
+
+```{r, eval=FALSE, echo=TRUE}
+library('tidyverse')
+library('prediction')
+library('margins')
+library('mediation')
+library('lme4')
+library('stargazer')
+library('skimr')
+```
+
+Lorsque les librairies ont été installées une fois, elles le reste. Il est donc inutile de réinstaller une librairie à chaque séance de travail. Par contre, à chaque fois que vous ouvrez `R`, il faudra à nouveau activer les librairies dont vous avez besoin avec la commande `library`.
+
+**ATTENTION!** Si vous suivez la version à distance de ce cours, les exercices et devoirs que vous aurez à faire **contiendront déjà les librairies nécessaires à leur réalisation**. Vous n'aurez donc **pas**, en temps normal, à ajouter des libraires au code. 
+
+## Importer des données
+
+Avant d'importer des données dans `R`, nous devons dire au logiciel dans quel dossier nous désirons travailler sur le disque dur. C'est là où `R` cherchera les banques de données existantes, et c'est là où `R` sauvegardera nos nouveaux résultats.
+
+Pour connaître le dossier de travail actuel, tapez :
+
+```{r, eval=FALSE}
+getwd()
+```
+
+Pour fixer le dossier de travail, il faut utiliser la commande `setwd`. Par exemple, si les banques de données avec lesquelles nous voulons travailler ont été sauvegardées sur un ordinateur Apple, la commande ressemblerait à:
+
+```{r, eval = FALSE}
+setwd("/Users/nomDelaSession/nomDuDossier/nomDuSousDossier")
+```
+
+Sur un ordinateur Windows, la commande serait plutôt:
+
+```{r, eval = FALSE}
+setwd("C:/Users/nomDelaSession/nomDuSousDossier")
+```
+
+Dans les commandes ci-haut, il est important de noter l'utilisation précise des guillemets et des barres obliques penchées vers l'avant. Évidemment, chaque utilisateur devra modifier les chemins de fichier pour pointer vers l'endroit approprié sur son disque dur.
+
+Il existe plusieurs types de fichiers pour sauvegarder et partager les bases de données. `R` peut lire la plupart d'entre eux. Le menu déroulant de `RStudio` permet de lire plusieurs types de banque de données en mémoire automatiquement. Il est aussi possible de lire les données manuellement avec les commandes de base du logiciel `R` (e.g., `read.csv`), ou avec la commande `import` de la librairie `rio`, qui permet d'importer facilement des données sauvegardées dans plus de 30 formats différents.
+
+Un des formats de sauvegarde les plus populaires est le CSV (*Comma Separated Values*, littéralement valeurs séparées par des virgules), un fichier texte bien adapté pour les bases de données de petite à moyenne taille (e.g., moins de 1 000 000 de rangées). Le fichier `titanic.csv` contient des informations sur les passagers à bord du Titanic lors de son dernier voyage. Pour lire cette banque de données et la transformer en data frame, nous utilisons la fonction `read.csv`:
+
+```{r, eval = FALSE, echo=TRUE}
+url <- 'https://raw.githubusercontent.com/WilliamPo1/ACMQ_UL/master/inst/tutorials/R/data/titanic.csv'
+titanic <- read.csv(url)
+head(titanic)
+```
+
+**ATTENTION!** Si vous suivez la version à distance de ce cours, les exercices et devoirs que vous aurez à faire **contiendront déjà les données nécessaires à leur réalisation**. Vous n'aurez donc **pas**, en temps normal, à changer d'arborescence. 
+
+## Types de données 
+
+`R` reconnait différents types de données. Pour nos besoins, il suffit de considérer les données numériques, texte,  logique, et les valeurs manquantes.
+
+### Numérique 
+
+Pour entrer une valeur *numérique*, il suffit de la taper dans la console:
+
+```{r echo=TRUE}
+4.35
+```
+
+`R` peut opérer sur des objets numériques comme une calculatrice ultra-puissante:
+
+```{r echo=TRUE}
+2 + 1
+
+3 * 2993
+
+4 / 10
+
+6 ^ 2
+```
+
+Lorsqu'une valeur numérique est très grosse ou très petite, `R` l'imprimera souvent en notation scientifique:
+
+```{r echo=TRUE}
+100000
+
+0.00001
+```
+
+### Texte
+
+Pour entrer des caractères, il faut les encadrer de guillemets:
+
+```{r echo=TRUE}
+"ceci est un texte"
+```
+
+
+### Logique
+
+Un objet logique (ou "booléen") prend seulement deux valeurs: `TRUE` / `FALSE`. L'objet logique sera particulièrement utile pour comparer des données numériques (section \ref{sec:r-comparaisons}).
+
+```{r echo=TRUE}
+TRUE
+```
+
+### Valeurs manquantes
+
+Finalement, `R` représente toute *valeur manquante* par le symbole `NA`:
+
+```{r echo=TRUE}
+NA
+```
+
+Les erreurs manquantes se "propagent" à travers les opérations mathématiques. Par exemple, la somme d'un nombre et d'une valeur inconnue est aussi inconnue:
+
+```{r echo=TRUE}
+3 + NA
+```
+
+
+## Types de données : Exercices
+
+Calculez la somme de 456 + 23 avec `R`:
+```{r somme, exercise=TRUE}
+
+```
+
+```{r somme-solution}
+456 + 23
+```
+
+Divisez 9 par `NA`, quel sera le résultat à vos avis? 
+
+```{r manquante, exercise=TRUE}
+
+```
+
+```{r manquante-solution}
+9/NA 
+```
+
+## Variables
+
+Le symbole `<-` permet d'assigner des objets à des "variables." Nous pouvons ensuite appliquer des opérations à ces variables:
+
+```{r echo=TRUE}
+z <- 'texte arbitraire'
+z
+
+x <- 9
+y <- 7
+
+x
+
+x + y
+```
+
+
+
+## Variables : Exercices
+
+Remplacez les valeurs de x par 6, y par 3 et z par 9 et calculer la somme des valeurs:
+
+```{r variable, exercise=TRUE}
+
+```
+
+```{r variable-solution}
+x <- 6
+y <- 3
+z <- 9
+
+x + y + z
+```
+
+## Vecteurs
+
+Un vecteur est une série de données d'un seul et même type. Pour créer un vecteur, nous utilisons la fonction `c`. Nous pouvons créer des vecteurs numérique, caractère, logique, ou autre:
+
+```{r echo=TRUE}
+c(1, 2, 3) 
+c('a', 'ab')
+c(TRUE, TRUE, FALSE)
+```
+
+Notez que si nous tentons de mélanger les types, `R` uniformisera toutes nos données automatiquement. Ici, tout devient caractère:
+
+```{r echo=TRUE}
+c('a', 1, 3)
+```
+
+Les vecteurs mixtes sont proscrits, mais un vecteur peut inclure des valeurs manquantes :
+
+```{r echo=TRUE}
+c(1, 2, NA, 4)
+```
+
+Nous pouvons sélectionner des données individuelles au sein des vecteurs en utilisant les crochets `[]` :
+
+```{r echo=TRUE}
+x <- c(75, 18, 35, 39)
+
+x[2]
+
+x[c(1, 4)]
+```
+
+Les éléments d'un vecteur peuvent être nommés afin de faciliter l'extraction de valeurs précises par crochets. Pour créer un vecteur aux éléments nommés, nous utilisons la commande `c` et le signe `=` :
+
+```{r echo=TRUE}
+x <- c('Premier' = 1, 'Deuxième' = 2, 'Troisième' = 3)
+x['Deuxième']
+```
+
+Nous pouvons aussi appliquer des opérations mathématiques à des vecteurs entiers :
+
+```{r echo=TRUE}
+x <- c(1, 2, 3, 4)
+y <- c(6, 7, NA, 9)
+
+x / 2
+
+x + y
+```
+
+La commande `length` donne le nombre d'éléments dans un vecteur :
+
+```{r echo=TRUE}
+length(x)
+```
+
+La fonction `vector` permet de créer un vecteur vide :
+
+```{r echo=TRUE}
+x <- vector()
+```
+
+Puisque le vecteur est vide, sa longeur est :
+
+```{r}
+length(x)
+```
+
+Nous pouvons assigner des valeurs à ce vecteur grâce aux crochets :
+
+```{r echo=TRUE}
+x[1] <- pi
+x[2] <- NA
+x[3] <- 10
+x
+```
+
+Les deux-points sont pratiques pour créer des vecteurs de nombres entiers consécutifs :
+
+```{r echo=TRUE}
+1:3
+4:8
+```
+
+
+
+## Vecteurs : Exercices
+
+Ce vecteur représente la consommation de viandes en kg par an de cinq personnes :
+
+```{r consommation, exercise=TRUE}
+viandkg_an <- c(34.5, 37, 46, 52, 55.7)
+viandkg_an
+```
+
+```{r}
+viandkg_an <- c(34.5, 37, 46, 52, 55.7)
+viandkg_an
+```
+
+
+Calculez le nombre d'éléments que contient le vecteur `viandkg_an` :
+```{r lenght, exercise=TRUE}
+
+```
+
+```{r lenght-solution}
+length(viandkg_an)
+```
+
+Nommez chaque élément du vecteur `viandkg_an` :
+
+```{r name, exercise=TRUE}
+
+```
+
+```{r name-solution}
+viandkg_an <- c('Oli'= 34.5, 'Paul'= 37, 'Claude'= 46, 'Chris'= 52, 'Stef'= 55.7)
+viandkg_an
+```
+
+Calculez la moyenne de `viandkg_an` :
+
+```{r moyenne, exercise=TRUE}
+
+```
+
+```{r moyenne-solution}
+mean(viandkg_an)
+
+```
+
+20 à 30% de la production totale de nourriture est gaspillée selon le GIEC en 2018. Nous suggérons alors que chaque personne devrait diviser par deux sa consommation de viandes par an, si c'était le cas, quelle serait leur consommation de viandes en kilogramme par an? on appelera le nouveau vecteur : `sug_viandkg_an`
+
+```{r suggestion, exercise=TRUE}
+
+```
+
+```{r suggestion-solution}
+sug_viandkg_an <- viandkg_an / 2
+sug_viandkg_an
+```
+
+Remplacez la valeur des trois premières personnes par `NA` et celle de la dernière personne par 25 dans le vecteur `viandkg_an` :
+
+```{r valeur, exercise=TRUE}
+
+```
+
+```{r valeur-solution}
+viandkg_an[1:3] <- NA
+viandkg_an[5] <-  25
+viandkg_an
+```
+
+## Fonctions
+
+Une fonction est un mot réservé par `R` pour appliquer une certaine opération à un objet. Par exemple, la fonction `log` calcule le logarithme d'un nombre:
+
+```{r, echo=TRUE}
+log(5)
+```
+
+Le résultat de certaines fonctions peut être modifié en employant des "arguments." Par défaut, la fonction `log` calcule le logarithme naturel, c'est-à-dire le logarithme à base $e$. En modifiant l'argument `base`, nous pouvons calculer $\log_e (15), \log_2 (15), \log_{10} (15)$, 
+
+```{r echo=TRUE}
+log(15)
+
+log(15, base = 2)
+
+log(15, base = 10)
+```
+
+R inclut plusieurs fonctions qui permettent de calculer les statistiques les plus communes, dont la moyenne (`mean`), la médiane (`median`), la variance (`var`), l'écart type (`sd`), la somme (`sum`), le minimum et le maximum (`min`, `max`), la covariance (`cov`), et la corrélation (`cor`). Par exemple,
+
+```{r echo=TRUE}
+x <- c(-1, 3, 5, 1, 5, 6, 7, 10)
+y <- c(-3, 4, 7, 0, 8, 9, 0, 14)
+
+mean(x) 
+
+sd(x) 
+
+min(x)
+
+cor(x, y)
+```
+
+Lorsque nos vecteurs comprennent des valeurs manquantes `NA`, les fonctions statistiques refusent parfois de produire un résultat. Ces fonctions ont des arguments spéciques pour dire à `R` comment traiter les valeurs manquantes (consultez le manuel avec `?`):
+
+Remarque : Une valeur manquante `NA` n'est pas un objet mathématique bien défini; il n'existe pas de méthode unique ou strictement correcte de calculer la moyenne (ou autre statistique) d'un ensemble qui comporte des valeurs manquantes. Par conséquent, `R` est prudent et demande à l'analyste de spécifier explicitement comment traiter les valeurs manquantes.
+
+```{r echo=TRUE}
+x <- c(-1, NA, 5, 1, 5, 6, 7, 10)
+y <- c(-3, 4, 7, 0, 8, 9, 0, 14)
+
+mean(x)
+
+mean(x, na.rm = TRUE)
+
+cor(x, y)
+
+cor(x, y, use = 'complete.obs')
+```
+
+Des fonctions qui seront utiles dans plusieurs chapitres sont celles qui génèrent des données aléatoires. Par exemple, la fonction suivante pige 5 nombres aléatoires dans un distribution normale (voir chapitre \ref{sec:probabilite}) :
+
+```{r}
+rnorm(5)
+```
+
+La fonction suivante pige 3 nombres aléatoires dans une distribution uniforme :
+
+```{r}
+runif(3)
+```
+
+<!--
+L'analyste peut aussi créer ses propres fonctions. Par exemple, imaginez qu'il veuille calculer le carré de la différence entre deux chiffres: $(a-b)^2$. Pour ce faire, il pourrait utiliser le code suivant:
+
+```{r, echo=TRUE}
+différence_au_carré <- function(arg1, arg2) {
+    résultat <- (arg1 - arg2)^2
+    return(résultat)
+}
+```
+
+Dans le code ci-haut, les variables `arg1` et `arg2` sont des arguments que l'utilisateur devra spécifier manuellement. La commande `return` indique quel objet devrait être retourné à l'utilisateur. La nouvelle fonction que nous avons définie produit les résultats attendus:
+
+```{r, echo=TRUE}
+différence_au_carré(2, 4)
+
+différence_au_carré(4, 2)
+
+différence_au_carré(1, 6)
+```
+-->
+
+## Fonctions : Exercices 
+Voici la base de donnée `uscereal` : 
+
+```{r context="data"}
+url <- 'https://raw.githubusercontent.com/vincentarelbundock/ACMQ/master/inst/tutorials/R/data/UScereal.csv'
+uscereal <- read.csv(url)
+uscereal
+```
+
+Calculez la moyenne et l'écart type de la variable `protein`. 
+Puis calculez la somme et le maximum de `sodium`. 
+
+```{r prosod, exercise=TRUE}
+x <- c(uscereal$protein)
+y <- c(uscereal$sodium)
+
+```
+
+```{r prosod-solution, results='markup'}
+x <- c(uscereal$protein)
+y <- c(uscereal$sodium)
+
+mean(x)
+sd(x)
+
+sum(y)
+max(y)
+```
+
+Calculez maintenant la corrélation entre la variable `protein`et `sodium`: 
+```{r correlation, exercise=TRUE}
+x <- c(uscereal$protein)
+y <- c(uscereal$sodium)
+```
+
+```{R correlation-solution}
+x <- c(uscereal$protein)
+y <- c(uscereal$sodium)
+cor(x, y)
+```
+
+## Data frame
+
+Un "data frame" est une collection de vecteurs. Ensemble, ces vecteurs forment une banque de données organisée en rangées et en colonnes, comme un tableur Microsoft Excel. Puisque les données dans une colonne correspondent à un vecteur, elles doivent toutes être du même type. Cependant, différentes colonnes peuvent contenir différents types de données.
+
+Nous pouvons utiliser la fonction `data.frame` pour combiner plusieurs vecteurs en un seul data frame:
+
+```{r echo=TRUE}
+Lettre <- c('a', 'b', 'c', 'd', 'e', 'f', 'g')
+Nombre <- c(1, 2, 3, 4, 5, 6, 7)
+Logique <- c(TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE)
+dat <- data.frame(Lettre, Nombre, Logique)
+```
+
+Pour examiner un data frame, il suffit de taper son nom dans la console :
+
+```{r echo=TRUE}
+dat
+```
+
+Pour voir les premières (ou dernières) rangées de la banque de données, on peut utiliser la commande `head` (ou `tail`). Par exemple, la commande suivante rend les trois premières rangées :
+
+```{r echo=TRUE}
+head(dat, n = 3)
+```
+
+L'interface `RStudio` permet aussi de visualiser les données dans un environnement graphique interactif, en tapant :
+
+```{r, eval=FALSE, echo=TRUE}
+View(dat)
+```
+
+La fonction `dim` indique que cette banque de données a `r nrow(dat)` rangées et `r ncol(dat)` colonnes :
+
+```{r echo=TRUE}
+dim(dat)
+```
+
+La fonction `colnames` donne les noms de colonnes :
+
+```{r echo=TRUE}
+colnames(dat)
+```
+
+La notation `dat[,]` permet d'extraire des colonnes ou des rangées d'un data frame. Un chiffre ou un vecteur placé *avant* la virgule choisit les rangées :
+
+```{r echo=TRUE}
+dat[1, ]
+
+dat[c(1, 3, 4), ]
+```
+
+Un chiffre ou un vecteur placé *après* la virgule choisit les colonnes :
+
+```{r echo=TRUE}
+dat[, 1]
+
+dat[, c(2, 3)]
+```
+
+Une façon alternative d'extraire une colonne est d'employer le symbole \$ :
+
+```{r echo=TRUE}
+dat$Nombre
+```
+
+Grâce à ce symbole, il est possible d'appliquer des fonctions directement à une colonne. Par exemple, nous pouvons calculer la médiane de la colonne "Nombre," ou la fréquence des différentes valeurs de la variable "Logique" :
+
+```{r echo=TRUE}
+median(dat$Nombre)
+
+table(dat$Logique)
+```
+
+Ce symbole nous permet aussi de créer de nouvelles variables :
+
+```{r echo=TRUE}
+dat$Nombre2 <- dat$Nombre^2
+
+dat
+```
+
+Pour éliminer une variable, nous lui assignons la valeur `NULL` :
+
+```{r echo=TRUE}
+dat$Nombre2 <- NULL
+
+dat
+```
+
+
+<!--
+## Autres structures
+
+Facteurs
+
+Listes
+-->
+
+
+## Data Frame : Exercices
+
+En utilisant toujours la même base de donnée : `uscereal`,
+
+```{r context="data"}
+url <- 'https://raw.githubusercontent.com/vincentarelbundock/ACMQ/master/inst/tutorials/R/data/UScereal.csv'
+uscereal <- read.csv(url)
+uscereal
+```
+
+Extrayez les cinq premières rangées :
+
+```{r rangee, exercise=TRUE}
+# N'oubliez pas qu'un chiffre ou un vecteur placé avant la virgule choisit les rangées.
+```
+
+```{r rangee-solution}
+uscereal[c(1:5), ]
+```
+
+Calculez le nombre de colonnes et de rangées du data frame `uscereal`?
+
+```{r colran, exercise=TRUE}
+
+```
+
+```{r colran-solution}
+dim(uscereal)
+```
+
+Extrayez la colonne `potassium` et calculez sa médiane en utilisant le symbole `$` : 
+
+```{r colonnes, exercise=TRUE}
+# Pour cette exercice, le symbole $ nous permet d'extraire une colonne dans un data frame.
+```
+
+```{r colonnes-solution}
+uscereal$potassium
+median(uscereal$potassium)
+
+```
+
+Extrayez les rangées *Life*, *Lucky Charms*, *Special K* : 
+
+```{r marques, exercise=TRUE}
+# N'oubliez pas qu'un chiffre ou un vecteur placé avant la virgule choisit les rangées.
+```
+
+```{r marques-solution}
+uscereal[c(38, 39, 57), ]
+
+```
+
+## Comparaisons
+
+\label{sec:r-comparaisons}
+
+R nous permet de vérifier si certaines conditions sont vraies, à l'aide des symboles `<`, `>`, `<=`, `>=`, `==`, `%in%`:
+
+```{r echo=TRUE}
+x <- c(10, 11, 12)
+y <- c(1, 2, 3)
+
+y >= 2
+
+x / y < 5
+
+x - y == 9 
+```
+
+Dans cette dernière comparaison, il faut noter que nous avons utilisé un double signe d'égalité: `==`. Dans `R`, un simple `=` est pour assigner la valeur d'une variable (équivalent à `<-`), ou la valeur de l'argument d'une fonction (comme dans `log(2, base = 3)`). Lorsque nous voulons comparer l'égalité de deux nombres, il faut utiliser `==`.
+
+L'opérateur `%in%` vérifie si un vecteur contient une valeur donnée :
+
+```{r echo=TRUE}
+2 %in% c(1, 3, 7)
+
+'blanc' %in% c('bleu', 'blanc', 'rouge')
+```
+
+Nous pouvons combiner les comparaisons à l'aide de parenthèses et des symboles `&` (qui signifie "et") et `|` (qui signifie "ou"):
+
+```{r echo=TRUE}
+x <- 3
+y <- 10
+
+(x > 2) & (y >= 11)
+
+(x > 5) | (x + y == 13)
+```
+
+Les comparaisons sont utiles, surtout en combinaison avec la fonction `ifelse`. Cette fonction prend trois arguments: (1) *test* -- une comparaison; (2) *yes* -- la valeur à retourner si la comparaison produit le logique `TRUE`; (3) *no* -- la valeur à retourner si la comparaison produit le logique `FALSE`.
+
+Pour illustrer, considérons la colonne `Nombre` du data frame `dat` :
+
+```{r echo=TRUE}
+dat$Nombre
+```
+
+`ifelse` peut produire plusieurs résultats intéressants :
+
+```{r echo=TRUE}
+ifelse(dat$Nombre < 4, 'Succès', 'Échec')
+
+ifelse(dat$Nombre < 4, dat$Nombre, NA)
+
+ifelse(dat$Nombre^2 > 48, 1000, dat$Nombre)
+```
+
+Comme nous le verrons plus bas, ce type de transformation est utile pour préparer les données pour l'analyse statistique.
+
+
+## Comparaisons : Exercices 
+
+Montrez quelles sont les céréales qui contiennent 260 calories ou plus dans le data frame `uscereal`. Indiquez en `NA`  celles qui contiennent moins de 260 calories.
+
+```{r context="data"}
+url <- 'https://raw.githubusercontent.com/vincentarelbundock/ACMQ/master/inst/tutorials/R/data/UScereal.csv'
+uscereal <- read.csv(url)
+uscereal
+```
+
+En utilisant la fonction `ifelse`, indiquez les cérérales qui contiennent 260 calories et plus dans le data frame `uscereal`. Veuillez indiquer `NA` pour celles qui contiennent moins de 260.
+```{r superieur, exercise=TRUE}
+# Utilisez le symbole $ pour selectionner la colonne "calories".
+```
+
+```{r superieur-solution}
+ifelse(uscereal$calories >= 260, uscereal$calories, NA)
+```
