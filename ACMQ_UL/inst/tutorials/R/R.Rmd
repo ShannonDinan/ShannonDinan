@@ -1,5 +1,5 @@
 ---
-title: "ACMQ: Tutoriel R"
+title: "ACMQ: Tutoriel R pour POL 2000"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -11,9 +11,11 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## R
 
-`R` est un langage de programmation spécialisé dans l'analyse statistique et la visualisation de données. La première version de `R` a été publiée en 1995 par Ross Ihaka et Robert Gentleman, mais le langage s'inspire des travaux de John Chambers aux laboratoires Bell dans les années 1970. Aujourd'hui, `R` est un outil d'analyse statistique populaire, tant dans le secteur privé que dans le monde universitaire. Puisque le langage `R` est développé par des bénévoles, les logiciels qui y sont associés sont presque tous distribués gratuitement, en libre accès. 
+Ce tutoriel est conçu pour vous aider à découvrir `R`. Suffit de lire le texte et cliquer sur "Next Topic" pour aller à la prochaine section. Certains éléments de ce tutoriel sont interactifs. De cette manière, si vous écrivez des lignes de code dans ce tutoriel, la réponse se trouvera dans votre `RStudio` ou `RStudio Cloud`. Le cas échéant, nous vous invitons à consulter les fenêtres de votre `RStudio` ou `RStudio Cloud`. La première exemple de ceci sera à la section "Manuel d'instruction". Une fois exécuté, vous verrez la réponse à la ligne de code `?ifelse` dans la fenêtre "Help" (en bas à droite) de votre `RStudio` ou `RStudio Cloud`. D'autre réponses peuvent apparaître dans la console.
 
-Ce tutoriel est conçu pour vous aider à découvrir `R`. Suffit de lire le texte et cliquer sur Next Topic pour aller à la prochaine section. Vous n'avez pas besoin de quitter cette fenêtre ou de retourner à RStudio ou RStudio Cloud.
+Maintenant que vous comprenez le fonctionnement de ce tutoriel, qu'est-ce `R`? 
+
+`R` est un langage de programmation spécialisé dans l'analyse statistique et la visualisation de données. La première version de `R` a été publiée en 1995 par Ross Ihaka et Robert Gentleman, mais le langage s'inspire des travaux de John Chambers aux laboratoires Bell dans les années 1970. Aujourd'hui, `R` est un outil d'analyse statistique populaire, tant dans le secteur privé que dans le monde universitaire. Puisque le langage `R` est développé par des bénévoles, les logiciels qui y sont associés sont presque tous distribués gratuitement, en libre accès. 
 
 ## Installation
 
@@ -40,7 +42,7 @@ Troisièmement, il est utile d'installer l'interface graphique `RStudio`. Ce log
 
 ## Interface graphique
 
-Le Graphique \ref{fig:rstudio} montre une capture d'écran de `RStudio`. L'analyste peut analyser ses données en mode interactif dans la "Console", en cliquant sur la fenêtre en bas à gauche, et en y tapant ses commandes suivies par la touche "Entrée."
+Le Graphique montre une capture d'écran de `RStudio`. L'analyste peut analyser ses données en mode interactif dans la "Console", en cliquant sur la fenêtre en bas à gauche, et en y tapant ses commandes suivies par la touche "Entrée."
 
 ```{r rstudio, echo=FALSE, fig.cap='Interface graphique du logiciel RStudio.', out.width='100%'}
 knitr::include_graphics('https://github.com/vincentarelbundock/ACMQ/raw/master/inst/tutorials/R/data/rstudio.png')
@@ -52,7 +54,7 @@ Lorsque l'analyste veut exécuter plus qu'une ou deux commandes, il est préfér
 
 ## Manuel d'instruction
 
-Chaque commande du langage `R` est accompagnée d'un manuel d'instruction. Pour consulter ce document de référence, il faut écrire le nom de la commande précédée d'un point d'interrogation. Par exemple, taper la commande suivante dans la console fait apparaître le manuel copié dans le Graphique \ref{fig:ifelse}:
+Chaque commande du langage `R` est accompagnée d'un manuel d'instruction. Pour consulter ce document de référence, il faut écrire le nom de la commande précédée d'un point d'interrogation. Par exemple, taper la commande suivante dans la console fait apparaître le manuel copié dans le Graphique :
 
 ```{r manual, exercise=TRUE}
 ?ifelse
@@ -72,9 +74,9 @@ Le plus grand avantage du logiciel en libre accès `R`, est qu'une vaste communa
 
 Par exemple, la librairie `ggplot2` dessine de superbes graphiques statistiques, et `gganimate` met ces graphiques en mouvement; `haven` lit plusieurs types de bases de données, dont celles produites par les logiciels Stata, SPSS, et SAS; `quanteda` facilite l'analyse quantitative de textes; et `modelsummary` produit de beaux tableaux pour résumer plusieurs modèles statistiques côte-à-côte; `skimr` produit d'utiles résumés des données. Plusieurs librairies permettent de télécharger facilement des données, dont `quantmod` pour les données financières, `WDI` pour les données de la banque mondiale, et `rvest` pour les données qui doivent être moissonnées à partir du web. `R` a aussi de nombreuses librairies pour analyser les données spatiales, pour faire de l'analyse de réseau, de la cartographie, etc.
 
-Pour télécharger et installer ces librairies, il faut utiliser la fonction `install.packages`. Dans le contexte de ce livre, nous utiliserons cinq librairies, en plus des commandes de base. 
+Pour télécharger et installer ces librairies, il faut utiliser la fonction `install.packages`. Dans le contexte de ce livre, nous utiliserons cinq librairies, en plus des commandes de base. Dans le contexte du cours POL 2000, nous ajoutons deux autres libraries.
 
-Vous pouvez installer les librairies nécessaires pour compléter le livre ACMQ en copiant le code suivant dans la fenêtre "Console" de `RStudio`. **ATTENTION!** Il ne sera pas possible de télécharger ces librairies lorsque ce tutoriel fonctionne. Ceci s'explique du fait que `RStudio` fonctionne actuellement (par exemple, si vous retournez voir votre `RStudio`, vous verrez un bouton rouge "Stop" dans la console. Ceci nous indique que `RStudio` exécute actuellement une ligne de code. De cette manière, si vous tentez de  télécharger ces librairies, `RStudio` va uniquement les mettre dans la file d'attente de commandes à exécuter. Je vous suggère donc plutôt de copier ces lignes de code dans un Script.R pour les télécharger plus tard. Enfin, sachez que cette opération peut prendre quelques minutes :
+Vous pouvez installer les librairies nécessaires pour compléter le livre ACMQ et le cours POL 2000 en copiant le code suivant dans la fenêtre "Console" de `RStudio`. **ATTENTION!** Il ne sera pas possible de télécharger ces librairies lorsque ce tutoriel fonctionne. Ceci s'explique du fait que `RStudio` fonctionne actuellement (par exemple, si vous retournez voir votre `RStudio`, vous verrez un bouton rouge "Stop" dans la console. Ceci nous indique que `RStudio` exécute actuellement une ligne de code. De cette manière, si vous tentez de  télécharger ces librairies, `RStudio` va uniquement les mettre dans la file d'attente de commandes à exécuter. Je vous suggère donc plutôt de copier ces lignes de code dans un Script.R pour les télécharger plus tard. Enfin, sachez que cette opération peut prendre quelques minutes :
 
 ```{r, eval=FALSE, echo=TRUE}
 install.packages('tidyverse')
@@ -108,19 +110,19 @@ Avant d'importer des données dans `R`, nous devons dire au logiciel dans quel d
 
 Pour connaître le dossier de travail actuel, tapez :
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 getwd()
 ```
 
 Pour fixer le dossier de travail, il faut utiliser la commande `setwd`. Par exemple, si les banques de données avec lesquelles nous voulons travailler ont été sauvegardées sur un ordinateur Apple, la commande ressemblerait à:
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo=TRUE}
 setwd("/Users/nomDelaSession/nomDuDossier/nomDuSousDossier")
 ```
 
 Sur un ordinateur Windows, la commande serait plutôt:
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, echo=TRUE}
 setwd("C:/Users/nomDelaSession/nomDuSousDossier")
 ```
 
@@ -131,7 +133,7 @@ Il existe plusieurs types de fichiers pour sauvegarder et partager les bases de 
 Un des formats de sauvegarde les plus populaires est le CSV (*Comma Separated Values*, littéralement valeurs séparées par des virgules), un fichier texte bien adapté pour les bases de données de petite à moyenne taille (e.g., moins de 1 000 000 de rangées). Le fichier `titanic.csv` contient des informations sur les passagers à bord du Titanic lors de son dernier voyage. Pour lire cette banque de données et la transformer en data frame, nous utilisons la fonction `read.csv`:
 
 ```{r, eval = FALSE, echo=TRUE}
-url <- 'https://raw.githubusercontent.com/WilliamPo1/ACMQ_UL/master/inst/tutorials/R/data/titanic.csv'
+url <- 'https://github.com/ShannonDinan/ShannonDinan/blob/main/ACMQ_UL/inst/tutorials/R/data/titanic.csv'
 titanic <- read.csv(url)
 head(titanic)
 ```
