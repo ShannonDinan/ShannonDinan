@@ -1,5 +1,5 @@
 ---
-title: "ACMQ: Tutoriel R pour POL 2000"
+title: "ACMQ : Tutoriel R pour POL 2000"
 output: learnr::tutorial
 runtime: shiny_prerendered
 ---
@@ -10,8 +10,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## R
-
-Ce tutoriel est conçu pour vous aider à découvrir `R`. Suffit de lire le texte et cliquer sur "Next Topic" pour aller à la prochaine section. Certains éléments de ce tutoriel sont interactifs. De cette manière, si vous écrivez des lignes de code dans ce tutoriel, la réponse se trouvera dans votre `RStudio` ou `RStudio Cloud`. Le cas échéant, nous vous invitons à consulter les fenêtres de votre `RStudio` ou `RStudio Cloud`. La première exemple de ceci sera à la section "Manuel d'instruction". Une fois exécuté, vous verrez la réponse à la ligne de code `?ifelse` dans la fenêtre "Help" (en bas à droite) de votre `RStudio` ou `RStudio Cloud`. D'autre réponses peuvent apparaître dans la console.
+Ce tutoriel est conçu pour vous aider à découvrir `R`. Suffit de lire le texte et cliquer sur "Next Topic" pour aller à la prochaine section. Les sections "Exercices" sont interactives. De cette manière, lorsque vous cliquez sur "Run code" vous aurez un retour similaire à ce que vous allez voir dans la console. Il n'y a qu’une seule exception à la section "Manuel d'instruction". Une fois que vous exécuté, vous verrez la réponse à la ligne de code `?ifelse` dans la fenêtre "Help" (en bas à droite) de votre `RStudio` ou `RStudio Cloud`. 
 
 Maintenant que vous comprenez le fonctionnement de ce tutoriel, qu'est-ce `R`? 
 
@@ -183,7 +182,7 @@ Pour entrer des caractères, il faut les encadrer de guillemets:
 
 ### Logique
 
-Un objet logique (ou "booléen") prend seulement deux valeurs: `TRUE` / `FALSE`. L'objet logique sera particulièrement utile pour comparer des données numériques (section \ref{sec:r-comparaisons}).
+Un objet logique (ou "booléen") prend seulement deux valeurs: `TRUE` / `FALSE`. L'objet logique sera particulièrement utile pour comparer des données numériques.
 
 ```{r echo=TRUE}
 TRUE
